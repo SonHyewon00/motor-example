@@ -1,0 +1,53 @@
+//핀 설정 
+const int Step = 53; //모터 PWM 핀 
+const int Dir = 52; // 모터 방향 핀 
+
+//속도 
+const int Speed = 800; // 회전 속도 조절
+
+void setup() 
+{
+  // 핀 설정 
+
+  pinMode(Step, OUTPUT); 
+  pinMode(Dir, OUTPUT);
+  Serial.begin(9600);
+   
+}
+
+
+void loop() 
+{
+  int i;
+  
+  //High 상태는 반시계방향 이동
+  digitalWrite(Dir,HIGH);
+  Serial.println("right");
+  
+   //i = 2000step 1바퀴 
+  for(i = 0; i < 2000; i++)
+  {
+    
+    digitalWrite(Step,HIGH);
+    delayMicroseconds(Speed);
+    digitalWrite(Step,LOW);
+    delayMicroseconds(Speed);
+    
+  }
+  //1초 대기 
+  delay(1000);
+
+  //Low 상태는 시계방향 이동
+  digitalWrite(Dir,LOW);
+  Serial.println("left");
+    for(i = 0; i < 2000; i++)
+  {
+    digitalWrite(Step,HIGH);
+    delayMicroseconds(Speed);
+    digitalWrite(Step,LOW);
+    delayMicroseconds(Speed);
+      
+  }
+  //1초 대기 
+  delay(1000);
+}
